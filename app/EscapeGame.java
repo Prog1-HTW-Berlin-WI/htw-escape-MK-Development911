@@ -39,7 +39,7 @@ public class EscapeGame {
         return gameFinished;
     }
     /** 
-     * Setzt den Spiel beendet-Status.
+     * Setzt das Spiel in den beendet-Status.
     */
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
