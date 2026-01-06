@@ -2,6 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+/** 
+ * Klasse für die Dozenten im Spiel.
+ * @author Sophie Amrollah Majdabadi
+ * @author Marvin Kühne
+*/
 public class Lecturer implements Serializable {
 
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der

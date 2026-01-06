@@ -2,6 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+/** 
+ * Klasse für den Helden im Spiel.
+ * @author Sophie Amrollah Majdabadi
+ * @author Marvin Kühne
+*/
 public class Hero implements Serializable {
 
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der

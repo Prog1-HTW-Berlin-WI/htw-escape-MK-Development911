@@ -3,6 +3,11 @@ package model;
 import java.io.Serial;
 import java.io.Serializable;
 
+/** 
+ * Klasse für die Räume der HTW im Spiel.
+ * @author Sophie Amrollah Majdabadi
+ * @author Marvin Kühne
+*/
 public class HTWRoom implements Serializable {
 
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der
