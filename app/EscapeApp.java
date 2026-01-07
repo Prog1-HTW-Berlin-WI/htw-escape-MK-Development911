@@ -16,10 +16,12 @@ public class EscapeApp {
 
     /** 
      * Der Name der Datei, in der das Spiel gespeichert wird.  
+    /** Der Name der Datei, in der das Spiel gespeichert wird.  
     */
     public static final String SAVE_FILE_NAME = "save";
     private EscapeGame game;
     private boolean gameRunning = true; 
+    private boolean gameRunning = true;
 
     /**
      * Main-Methode zum Starten der Anwendung.
@@ -84,6 +86,7 @@ public class EscapeApp {
     /**
      * Verarbeitet die Benutzereingabe im Hauptmenü. 
      * @param input die Benutzereingabe als String
+     * @param input die Benutzereingabe liest und auswertet
     */
     private void handleUserInput(String input) {
         switch (input) {
