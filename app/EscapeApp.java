@@ -13,22 +13,19 @@ import java.util.Scanner;
 * @author Marvin Kühne
 */
 public class EscapeApp {
-
-    /** 
-     * Der Name der Datei, in der das Spiel gespeichert wird.  
+  
     /** Der Name der Datei, in der das Spiel gespeichert wird.  
     */
     public static final String SAVE_FILE_NAME = "save";
     private EscapeGame game;
     private boolean gameRunning = true; 
-    private boolean gameRunning = true;
 
     /**
      * Main-Methode zum Starten der Anwendung.
      * @param args  
      */
     public static void main(String[] args) {
-
+        
         System.out.println("========================================");
         System.out.println( "An einem Morgen im Januar 2026 wirst du im Gebaeude A der HTW Berlin mit einer surrealen Situation konfrontiert:" + "\n" +
         "Eine menschengrosse Schnecke versperrt dir den Weg, waehrend die Ausgaenge verriegelt sind." + "\n"+
@@ -37,10 +34,9 @@ public class EscapeApp {
         "Der Weg zu ihr fuehrt jedoch ueber eine Schnitzeljagd durch die Hochschule:" + "\n" +
         "Du musst verschiedene Uebungsleiter der Programmierung in Raeumen aufspueren." + "\n"+
         "Erst wenn du von allen Leitern eine Unterschrift gesammelt hast," + "\n"+
-        "erhaeltst du die notwendigen Informationen, um die Professorin zu finden und die HTW wieder verlassen zu koennen." );
-        System.out.println("========================================" +"\n");
-        
+        "erhaeltst du die notwendigen Informationen, um die Professorin zu finden und die HTW wieder verlassen zu koennen." + "\n" );
         System.out.println("========================================");
+        
         System.out.println("Welcome to the HTW escape");
         System.out.println("========================================\n");
 
@@ -85,7 +81,6 @@ public class EscapeApp {
     }
     /**
      * Verarbeitet die Benutzereingabe im Hauptmenü. 
-     * @param input die Benutzereingabe als String
      * @param input die Benutzereingabe liest und auswertet
     */
     private void handleUserInput(String input) {
