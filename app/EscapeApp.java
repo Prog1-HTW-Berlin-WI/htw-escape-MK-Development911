@@ -26,6 +26,18 @@ public class EscapeApp {
      * @param args  
      */
     public static void main(String[] args) {
+        
+        System.out.println("========================================");
+        System.out.println( "An einem Morgen im Januar 2026 wirst du im Gebaeude A der HTW Berlin mit einer surrealen Situation konfrontiert:" + "\n" +
+        "Eine menschengrosse Schnecke versperrt dir den Weg, waehrend die Ausgaenge verriegelt sind." + "\n"+
+        "Was zunaechst wie ein Angriff wirkt, entpuppt sich als Gespraechsversuch des Tieres." + "\n"+
+        "Um aus dem Gebaeude zu entkommen, musst du Professorin Majuntke finden, die als Einzige den Fluchtweg kennt." + "\n"+
+        "Der Weg zu ihr fuehrt jedoch ueber eine Schnitzeljagd durch die Hochschule:" + "\n" +
+        "Du musst verschiedene Uebungsleiter der Programmierung in Raeumen aufspueren." + "\n"+
+        "Erst wenn du von allen Leitern eine Unterschrift gesammelt hast," + "\n"+
+        "erhaeltst du die notwendigen Informationen, um die Professorin zu finden und die HTW wieder verlassen zu koennen." + "\n" );
+        System.out.println("========================================");
+        
         System.out.println("Welcome to the HTW escape");
         System.out.println("========================================\n");
 
