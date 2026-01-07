@@ -1,7 +1,7 @@
 package app;
 
-import model.Hero;
 import model.HTWRoom;
+import model.Hero;
 
 /**
 * Klasse für die notwendigen Elemente und Aufrufe des Spiels.
