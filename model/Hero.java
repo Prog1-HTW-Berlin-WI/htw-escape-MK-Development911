@@ -20,18 +20,52 @@ public class Hero implements Serializable {
     private int xp;
     private String[] signedExerciseLeaders;
 
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public int setHp(){
+        return this.hp;
+    }
+
+    public void getHp(int hp){
+        this.hp = hp;
+    }
+
+    public int setMaxHP(){
+        return this.maxHP;
+    }
+
+    public void getMaxHP(int maxHP){
+        this.maxHP = maxHP;
+    }
+
+    public int setXp(){
+        return this.xp;
+    }
+
+    public void getXp(int xp){
+        this.xp = xp;
+    }
+
+
+
     /**
      * Konstruktor für den Helden.
      * @param name
      * @param maxHP
      */
-    public Hero(String name, int maxHP) {
+    /*public Hero(String name, int maxHP) {
         this.name = name;
         this.maxHP = maxHP;
         this.hp = maxHP;
         this.xp = 0;
         this.signedExerciseLeaders = new String[6]; // maximum of six lecturers
-    }
+    }*/
 
     /** 
      * Nimmt Schaden am Helden.

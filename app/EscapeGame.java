@@ -1,5 +1,6 @@
 package app;
 
+import java.util.Scanner;
 import model.HTWRoom;
 import model.Hero;
 
@@ -20,17 +21,39 @@ public class EscapeGame {
     public EscapeGame() {
         this.hero = new Hero();
     }
+    
+    public void chooseName(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Before you can start your journey, please choose a name for your Hero: ");
+        String heroName = scanner.nextLine();
+        hero.setName(heroName);
+        System.out.println("Your name has been set to " +heroName+ ". Your journey begins now, Try to find Miss Majuntke and Escape HTW!");
+    }
+
     /** 
-     * Prüft, ob ein Spiel läuft.
+     * Startet das Spiel.
     */
-    public boolean isGameRunning() {
-        return gameRunning;
+    public void run() {
+        System.out.println("The game has started. Or not?");
+        chooseName();
     }
     /** 
      * Setzt den Spielstatus.
     */
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
+    }
+     /** 
+     * Gibt den erstellten Helden zurück.
+    */
+    public Hero getHero() {
+        return hero;
+    }
+    /** 
+     * Prüft, ob ein Spiel läuft.
+    */
+    public boolean isGameRunning() {
+        return gameRunning;
     }
     /** 
      * Prüft, ob das Spiel beendet ist.
@@ -43,17 +66,5 @@ public class EscapeGame {
     */
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
-    }
-    /** 
-     * Startet das Spiel.
-    */
-    public void run() {
-        System.out.println("The game has started. Or not?");
-    }
-    /** 
-     * Gibt den erstellten Helden zurück.
-    */
-    public Hero getHero() {
-        return hero;
     }
 }
