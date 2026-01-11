@@ -64,7 +64,9 @@ public class EscapeApp {
         if (hasSavedGame()){
         System.out.println("(3) Load saved game");
         }
+        if (hasSavedGame()) {
             System.out.println("(4) Save game");
+        }
         if (hasSavedGame()) {
             System.out.println("(5) Delete save");
         } 
