@@ -34,7 +34,7 @@ public class EscapeGame {
      * Startet das Spiel.
     */
     public void run() {
-        System.out.println("The game has started. Or not?");
+        //System.out.println("The game has started. Or not?");
         chooseName();
     }
     /** 
