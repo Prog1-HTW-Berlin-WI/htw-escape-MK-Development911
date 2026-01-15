@@ -187,6 +187,6 @@ public class Hero implements Serializable {
      * @return true, wenn der Held betriebsbereit ist, sonst false
     */
     public boolean isOperational() {
-        return this.hp > 0;
+        return this.hp > 0; 
     }
 }

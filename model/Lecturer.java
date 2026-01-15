@@ -65,7 +65,7 @@ public class Lecturer implements Serializable {
             System.out.println("The Lecturer " +getName()+ " is ready to sign!"); 
         }
         else {
-            System.out.println("Lecturer " +getName()+ "left the room... it's just you and an empty room.");
+            System.out.println("Lecturer " +getName()+ "left the room.. it's just you and an empty room.");
         }
     }
 }
