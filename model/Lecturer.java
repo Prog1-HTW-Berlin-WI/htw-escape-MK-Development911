@@ -53,19 +53,19 @@ public class Lecturer implements Serializable {
      * Gibt an, ob Lecturer bereit ist zu Unterschreiben (noch ohne bedingung, vielleicht ändern?)
      * return true (er ist !noch! jederzeit bereit)
     */
-    public boolean isReadyToSign(){
+    public boolean isReadyToSign(Lecturer lecturer){
         return true;
     }
     /** 
      * Lecturer unterschreibt, wenn bedingung true ist
     */
     public void sign(){
-        if (isReadyToSign()){
+        if (isReadyToSign(Lecturer.this)){
             this.hasSigned = true;
             System.out.println("The Lecturer " +getName()+ " is ready to sign!"); 
         }
         else {
-            System.out.println("Lecturer " +getName()+ "is not ready to sign yet...");
+            System.out.println("Lecturer " +getName()+ "left the room... it's just you and an empty room.");
         }
     }
 }

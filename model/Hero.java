@@ -16,9 +16,9 @@ public class Hero implements Serializable {
     private static final long serialVersionUID = 3578735620108186013L;
 
     private String name;
-    private int hp;
-    private int maxHP;
-    private int xp;
+    private int hp = 50;
+    private int maxHP = 50;
+    private int xp = 0;
     private String[] signedExerciseLeaders;
     private EscapeGame game;
     private int healAmountLong = 10;
@@ -108,7 +108,6 @@ public class Hero implements Serializable {
             System.out.println(name + " takes a long rest and fully regenerates to " + hp + "/" + maxHP + " HP.");
             } else {
             this.hp += healAmountShort;
-            if (this.hp > this.maxHP) this.hp = this.maxHP;
             System.out.println(name + " takes a short rest and regenerates to " + hp + "/" + maxHP + " HP.");
         }
         if (this.hp > this.maxHP) {
