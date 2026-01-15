@@ -15,6 +15,9 @@ public class EscapeGame {
     private final HTWRoom[] rooms = new HTWRoom[3];
     private boolean gameRunning = true;
     private boolean gameFinished = false;
+    private final int MAX_ROUNDS = 24;
+    private int rounds = 0;
+    
     /**
      * Konstruktor der EscapeGame-Klasse.
      */
@@ -45,19 +48,61 @@ public class EscapeGame {
     }
      /** 
      * Gibt den erstellten Helden zurück.
+     * @return der Held des Spiels
     */
     public Hero getHero() {
         return hero;
     }
     /** 
      * Prüft, ob ein Spiel läuft.
+     * @return true, wenn das Spiel läuft, sonst false
     */
     public boolean isGameRunning() {
         return gameRunning;
     }
+
     /** 
-     * Prüft, ob das Spiel beendet ist.
+     * Hauptspielschleife.
+     * Enthält momentan nur die Runden- und Regenerationslogik.
     */
+    public void gameloop() {
+        while (isGameRunning() && !isGameFinished()) {
+            for (rounds = 0; rounds < MAX_ROUNDS; rounds++) {
+                System.out.println("Round " + (rounds + 1) + " begins.");
+            }
+                boolean longRest = true;
+                
+                hero.regenerate(longRest); 
+                    if (longRest) {
+                        rounds+=1;
+                        System.out.println("Long rest taken, you skipped one round! HP restored by 10"); 
+                    } else {
+                        System.out.println("Short rest taken, no rounds skipped! HP restored by 3");
+                    }
+        }
+
+}
+    /** 
+     * Prüft, ob ein GameOver eingetreten ist.
+     * @return true, wenn das Spiel durch maximale Runden oder HP = 0 vorbei ist, sonst false
+    */
+    public boolean isGameOver() {
+        if( !hero.isOperational() ) {
+            System.out.println("Game Over! Your hero has fallen.");
+            return true;
+        }
+        if (rounds >= MAX_ROUNDS) {
+            System.out.println("Game Over! You have run out of time.");
+            System.exit(0);
+            return true;
+        }
+        return false;
+        
+
+         /** 
+     * Prüft, ob das Spiel beendet ist.
+    */   
+    }
     public boolean isGameFinished() {
         return gameFinished;
     }

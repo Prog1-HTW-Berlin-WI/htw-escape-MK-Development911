@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import app.EscapeGame;
 
 /** 
  * Klasse für den Helden im Spiel.
@@ -19,6 +20,9 @@ public class Hero implements Serializable {
     private int maxHP;
     private int xp;
     private String[] signedExerciseLeaders;
+    private EscapeGame game;
+    private int healAmountLong = 10;
+    private int healAmountShort = 3;
 
     public String getName(){
         return this.name;
@@ -52,6 +56,8 @@ public class Hero implements Serializable {
         this.xp = xp;
     }
 
+    
+
 
 
     /**
@@ -64,7 +70,7 @@ public class Hero implements Serializable {
         this.maxHP = maxHP;
         this.hp = maxHP;
         this.xp = 0;
-        this.signedExerciseLeaders = new String[6]; // maximum of six lecturers
+        this.signedExerciseLeaders = new String[5]; // maximum of five lecturers
     }*/
 
     /** 
@@ -84,15 +90,18 @@ public class Hero implements Serializable {
     */
     public void regenerate(boolean longRest) {
         if (longRest) {
-            this.hp = this.maxHP;
+            this.hp += healAmountLong;
             System.out.println(name + " takes a long rest and fully regenerates to " + hp + "/" + maxHP + " HP.");
-        } else {
-            int healAmount = (int)(this.maxHP);
-            this.hp += healAmount;
+            }
+                System.out.println(name + " takes a long rest and regenerates to " + hp + "/" + maxHP + " HP.");
+            } else {
+            this.hp += healAmountShort;
             if (this.hp > this.maxHP) this.hp = this.maxHP;
             System.out.println(name + " takes a short rest and regenerates to " + hp + "/" + maxHP + " HP.");
         }
-    }
+        if (this.hp > this.maxHP) {
+            this.hp = this.maxHP;
+        }
     /**
      * Versucht, dem Kampf zu entkommen.
      * @return true, wenn die Flucht erfolgreich war, sonst false
