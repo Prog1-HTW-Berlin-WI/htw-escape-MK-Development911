@@ -111,6 +111,9 @@ public class EscapeApp {
                 if(isGameRunning()){
                 this.saveGame();     // Speichern des aktuellen Spiels
                 }
+                else {
+                    System.out.println("You can't save a game that doesn't exist.");
+                }
                 break;
             case "5":
                 if(hasSavedGame()){   

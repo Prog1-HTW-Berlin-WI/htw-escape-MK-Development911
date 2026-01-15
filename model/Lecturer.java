@@ -12,18 +12,34 @@ public class Lecturer implements Serializable {
     private String name;
     private boolean hasSigned = false;
 
+    /**
+     * Gibt den namen des Lecturer zurueck
+     * @return der Name des Lecturer
+     */
     public String getName (){
         return this.name;
     }
 
+    /**
+     * Setzt namen von Lecturer fest
+     * @param name festgelegte name des Lecturer
+     */
     public void setName (String name){
         this.name = name;
     }
 
+    /**
+     * Prueft, ob ein Lecturer unterschrieben hat
+     * @return gibt true oder false zurueck, je nachdem ob der Lecturer unterschrieben hat oder nicht
+     */
     public boolean getHasSigned(){
         return this.hasSigned;
     }
 
+    /**
+     * Setzt den Status der Unterschriften fest
+     * @param hasSigned der momentane Unterschriften Status
+     */
     public void setHasSigned(boolean hasSigned){
         this.hasSigned = hasSigned;
     }

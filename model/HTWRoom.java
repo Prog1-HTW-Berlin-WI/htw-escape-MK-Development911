@@ -13,27 +13,51 @@ public class HTWRoom implements Serializable {
     private String description;
     private Lecturer lecturer;
 
-    public String setIdentifier(){
+    /**
+     * Gibt die Bezeichnung eines Raums zurueck
+     * @return die Bezeichnung
+     */
+    public String getIdentifier(){
         return this.identifier;
     }
 
-    public void getIdentifier(String identifier){
+    /**
+     * Setzt Bezeichnung eines Raums fest
+     * @param identifier die neue Bezeichnung des Raums
+     */
+    public void setIdentifier(String identifier){
         this.identifier = identifier;
     }
 
-    public String setDescription(){
+    /**
+     * Gibt die Beschreibung eines Raums zurueck
+     * @return die Beschreibung
+     */
+    public String getDescription(){
         return this.description;
     }
 
-    public void getDescription(String description){
+    /**
+     * Setzt die Beschreibung eines Raums fest
+     * @param description die neue Beschreibung
+     */
+    public void setDescription(String description){
         this.description = description;
     }
 
-    public Lecturer setLecturer(){
+    /**
+     * Gibt den Lecturer zurueck, der sich im Raum befindet
+     * @return der Lecturer
+     */
+    public Lecturer getLecturer(){
         return this.lecturer;
     }
 
-    public void getLecturer(Lecturer lecturer){
+    /**
+     * Setzt fest, welcher Lecturer sich im Raum befindet
+     * @param lecturer der festgelegte Lecturer
+     */
+    public void setLecturer(Lecturer lecturer){
         this.lecturer = lecturer;
     }
 

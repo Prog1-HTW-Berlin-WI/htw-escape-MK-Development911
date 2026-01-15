@@ -24,54 +24,68 @@ public class Hero implements Serializable {
     private int healAmountLong = 10;
     private int healAmountShort = 3;
 
+    /**
+     * Gibt namen des Heroes zurueck
+     * @return der Name
+     */
     public String getName(){
         return this.name;
     }
 
+    /**
+     * Setzt den Namen des Heroes fest
+     * @param name der neue Name
+     */
     public void setName(String name){
         this.name = name;
     }
 
-    public int setHp(){
+    /**
+     * Gibt HP zurueck
+     * @return Anzahl an HP
+     */
+    public int getHp(){
         return this.hp;
     }
 
-    public void getHp(int hp){
+    /**
+     * Setzt HP fest
+     * @param hp neue HP Wert
+     */
+    public void setHp(int hp){
         this.hp = hp;
     }
 
-    public int setMaxHP(){
+    /**
+     * Gibt den maximalen HP Wert zurueck
+     * @return Anzahl maximaler HP
+     */
+    public int getMaxHP(){
         return this.maxHP;
     }
-
-    public void getMaxHP(int maxHP){
+     /**
+      * Setzt die maximalen HP fest
+      * @param maxHP neue maximale HP Wert
+      */
+    public void setMaxHP(int maxHP){
         this.maxHP = maxHP;
     }
 
-    public int setXp(){
+    /**
+     * Gibt die Anzahl an XP zurueck
+     * @return Anzahl der XP
+     */
+    public int getXp(){
         return this.xp;
     }
 
-    public void getXp(int xp){
+    /**
+     * Setzt die XP fest
+     * @param xp neue Wert fuer XP
+     */
+    public void setXp(int xp){
         this.xp = xp;
     }
-
-    
-
-
-
-    /**
-     * Konstruktor für den Helden.
-     * @param name
-     * @param maxHP
-     */
-    /*public Hero(String name, int maxHP) {
-        this.name = name;
-        this.maxHP = maxHP;
-        this.hp = maxHP;
-        this.xp = 0;
-        this.signedExerciseLeaders = new String[5]; // maximum of five lecturers
-    }*/
 
     /** 
      * Nimmt Schaden am Helden.
@@ -92,8 +106,6 @@ public class Hero implements Serializable {
         if (longRest) {
             this.hp += healAmountLong;
             System.out.println(name + " takes a long rest and fully regenerates to " + hp + "/" + maxHP + " HP.");
-            }
-                System.out.println(name + " takes a long rest and regenerates to " + hp + "/" + maxHP + " HP.");
             } else {
             this.hp += healAmountShort;
             if (this.hp > this.maxHP) this.hp = this.maxHP;
@@ -102,6 +114,7 @@ public class Hero implements Serializable {
         if (this.hp > this.maxHP) {
             this.hp = this.maxHP;
         }
+    }
     /**
      * Versucht, dem Kampf zu entkommen.
      * @return true, wenn die Flucht erfolgreich war, sonst false
@@ -160,13 +173,6 @@ public class Hero implements Serializable {
                 return;
             }
         }
-    }
-    /** 
-     * Getter für die Erfahrungspunkte des Helden.
-     * @return die Erfahrungspunkte
-    */
-    public int getExperiencePoints() {
-        return xp;
     }
     /** 
      * Fügt dem Helden Erfahrungspunkte hinzu.
