@@ -4,6 +4,9 @@ import java.util.Scanner;
 import model.HTWRoom;
 import model.Hero;
 import model.Lecturer;
+import model.Alien;
+import model.Friendly;
+import model.Hostile;
 
 /**
 * Klasse für die notwendigen Elemente und Aufrufe des Spiels.
@@ -18,6 +21,9 @@ public class EscapeGame {
     private boolean gameFinished = false;
     private final int MAX_ROUNDS = 24;
     private int rounds = 0;
+    private Hostile enemy;
+    //TODO koennen vllt bei den einen gespeichert werden & objekt loeschen wenn defeated
+    private Friendly alien;
     
     /**
      * Konstruktor der EscapeGame-Klasse.
@@ -27,8 +33,16 @@ public class EscapeGame {
         this.rooms = new HTWRoom[24];
         for (int i = 0; i < rooms.length; i++) {
             rooms[i] = new HTWRoom();
-            rooms[i].setIdentifier("Room A0" + (i + 19));
-            rooms[i].setDescription("Room" + (i + 19) + " looks dusty.");
+            rooms[i].setIdentifier("Room A 0" + (i + 19));
+            if (i % 3 == 0) {
+                rooms[i].setDescription(", seems to be a PC-Room, maybe I could try and contact anyone?");
+            }
+            else if (i % 3 == 1) {
+                rooms[i].setDescription(", it's a simple classroom, the message \"NO WAY OUT\" is written on the board..");
+            }
+            else {
+                rooms[i].setDescription(", could be used to write an Exam, quite spacious.");
+            }
         }
     }
     public void chooseName(){
@@ -78,22 +92,9 @@ public class EscapeGame {
                 gameMenu();
             if (isGameOver() || isGameFinished() || endGame()) {
                 System.exit(0);
-            }
-            
-            
- }
-        boolean longRest = true;
-                
-        hero.regenerate(longRest); 
-            if (longRest) {
-                rounds+=1;
-                System.out.println("Long rest taken, you skipped one round! HP restored by 10"); 
-                } else {
-                System.out.println("Short rest taken, no rounds skipped! HP restored by 3");
-                    }
-
-}
-
+            }  
+        } 
+    }
 
     private void showGameMenu() {
         System.out.println("Game Menu:");
@@ -102,7 +103,7 @@ public class EscapeGame {
         System.out.println("[S] Show signatures");
         System.out.println("[R] Rest");
         System.out.println("[L] Leave Game");
-        System.out.println("Choose an action: ");
+        System.out.println("Choose an option: ");
     }
 
     private void gameMenu() {
@@ -113,12 +114,12 @@ public class EscapeGame {
                 System.out.println("Exploring HTW...");
                 System.out.println("There are two rooms in front of you: Room A and Room B. Which one do you want to enter? (A/B)");
                 String roomChoice = scanner.nextLine().toUpperCase();
-                rounds++;
-
-                
                 if (roomChoice.equals("A") || roomChoice.equals("B")) {
                     enterRandomRoom();
-                } 
+                    rounds++;
+                } else {
+                    System.out.println("Invalid choice, try going either way [A] or [B]");
+                }
                 break;
             case "H":
                 System.out.println("Hero Status:");
@@ -135,10 +136,11 @@ public class EscapeGame {
                 String restChoice = scanner.nextLine();
                 if (restChoice.equals("1")) {
                     hero.regenerate(true);
+                    rounds++;
                 } else if (restChoice.equals("2")) {
                     hero.regenerate(false);
                 } else {
-                    System.out.println("Invalid choice. No rest taken.");
+                    System.out.println("Invalid choice. No rest taken, try choosing either [1] or [2].");
                 }
                 break;
             case "L":
@@ -146,7 +148,8 @@ public class EscapeGame {
                 setGameRunning(false);
                 break;
             default:
-                System.out.println("Invalid choice. Please try again.");
+                System.out.println("Invalid choice. Please try using either option [E], [H], [S], [R] or [L].");
+                gameMenu();
         }
     }
 
@@ -188,17 +191,30 @@ public class EscapeGame {
     private void enterRandomRoom() {
         int randomIndex = (int) (Math.random() * rooms.length);
         HTWRoom selectedRoom = rooms[randomIndex];
-        System.out.println("You have entered the room:" + selectedRoom.getIdentifier());
-
+        System.out.println("You have entered " + selectedRoom.getIdentifier() + selectedRoom.getDescription());
+        
         double eventChance = Math.random();
 
         double alienChance = 0.52;
 
         double lecturerChance = 0.28;
 
+        double nothing = 0.20;
+
         if (eventChance < alienChance) {
-            System.out.println("An alien appears!");
-            // Placeholder for alien encounter logic
+            System.out.println("An Alien appears!");
+            boolean friendly = Math.random() < 0.50;
+            if (friendly){
+                alien = new Friendly();
+                alien.butters();
+                friendlyInputHandler();
+            }
+            else {
+                enemy = new Hostile();
+                enemy.manRay();
+                hostileInputHandler();
+            }
+            
         } else if (eventChance < alienChance + lecturerChance) {
             String[] lecturerNames = {"Mrs. Safitri", "Mr. Poeser", "Mrs. Vaseva", "Mrs. Gaertner", "Mrs. Gnaoui"};
             int lecturerIndex = (int) (Math.random() * lecturerNames.length);
@@ -226,7 +242,68 @@ public class EscapeGame {
                 System.out.println("You chose not to interact with " + lecturer.getName() + ".");
             }
         }
+        else {
+            System.out.println("There's nobody here.");
+        }
     }
+
+    public void friendlyInputHandler(){
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1":
+                    System.out.println("I see, you were trapped here...I saw Prof. Majuntke arrive in a spaceship herself, " +"\n"+ "maybe she isn't all she seems to be..");
+                    break;
+                case "2":
+                    if (hero.flee() == false) {
+                        System.out.println(", try and Flee again! [2]");
+                        friendlyInputHandler();
+            }   break;
+                default:
+                    System.out.println("Wrong input, please try either option [1] or [2].");
+                    friendlyInputHandler();
+                    break;
+                }
+        }
+
+        public void hostileInputHandler(){
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    System.out.println("You have entered a Battle! Try to defeat the Alien!");
+                    combatMenu();
+                    break;
+                case "2":
+                    if (hero.flee() == false) {
+                        System.out.println(" You now have to fight the Alien!");
+                        combatMenu();
+            }   break;
+                default:
+                    System.out.println("Wrong input, please try either option [1] or [2].");
+                    hostileInputHandler();  
+                    break;
+                }
+        }
+
+        public void combatMenu(){
+            System.out.println("Press [1] to attack!");
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1":
+                    while (!enemy.isDefeated()) {
+                        enemy.takeDamage(hero.attack());
+                        hero.takeDamage(enemy.attack());
+                }   if (enemy.isDefeated()) {
+                        System.out.println(hero.getName()+ " has gained " +hero.addExperiencePoints(5)+ "XP! Good job!");
+                        enemy = null;
+                }   break;
+                default:
+                    System.out.println("Wrong input, please try to use \"attack\".");
+                    break;
+            }
+        } 
 
         public boolean endGame() {
             if(hero.getAllSignaturesCollected()) {

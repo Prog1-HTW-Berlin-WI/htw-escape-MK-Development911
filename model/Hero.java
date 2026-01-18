@@ -105,10 +105,10 @@ public class Hero implements Serializable {
     public void regenerate(boolean longRest) {
         if (longRest) {
             this.hp += healAmountLong;
-            System.out.println(name + " takes a long rest and fully regenerates to " + hp + "/" + maxHP + " HP.");
+            System.out.println(name + " takes a long rest and regenerates to " + hp + "/" + maxHP + " HP. You have lost a round.");
             } else {
             this.hp += healAmountShort;
-            System.out.println(name + " takes a short rest and regenerates to " + hp + "/" + maxHP + " HP.");
+            System.out.println(name + " takes a short rest and regenerates to " + hp + "/" + maxHP + " HP. No round lost.");
         }
         if (this.hp > this.maxHP) {
             this.hp = this.maxHP;
@@ -124,9 +124,9 @@ public class Hero implements Serializable {
         boolean success = Math.random() < 0.42;
 
         if (success) {
-            System.out.println(name + " successfully flees from the encounter!");
+            System.out.println(name + " successfully flees from the encounter! " +name+ " Has gained " +addExperiencePoints(1)+ "XP.");
         } else {
-            System.out.println(name + " failed to flee!");
+            System.out.print(name + " failed to flee!");
         }
         return success;
     }
@@ -134,6 +134,7 @@ public class Hero implements Serializable {
      * Führt einen Angriff durch. Außerdem: Berechnung von kritischen Treffern und Fehlschlägen.
      * @return der verursachte Schaden
     */
+
     public int attack() {
     double chance = Math.random();
     
@@ -205,9 +206,9 @@ public class Hero implements Serializable {
      * @param xp die hinzuzufügenden Erfahrungspunkte
      * @return die neuen Erfahrungspunkte
     */
-    public int addExperiencePoints(int xp) {
-        this.xp += xp;
-        return this.xp;
+    public int addExperiencePoints(int experience) {
+        this.xp += experience;
+        return experience;
     }
     /** 
      * Prüft, ob der Held noch betriebsbereit ist (HP > 0).

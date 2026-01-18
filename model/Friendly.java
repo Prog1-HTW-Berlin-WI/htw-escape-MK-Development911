@@ -1,0 +1,16 @@
+package model;
+
+public class Friendly extends Alien {
+
+    public Friendly() {
+        super();
+        name = "Butters";
+        friendly = true;
+        greeting = "My name is Butters! You seem lost..Do you need any help?";
+        
+    }
+    
+        public void butters(){
+                System.out.println("This Alien seems friendly...Do you want to ask for Help (1) or Flee? (2)");   
+        }
+}

@@ -1,6 +1,8 @@
 package model;
 
+import java.util.Scanner;
 import java.io.Serializable;
+import model.Hero;
 
 /**
 * Abstrakte Klasse für alle Aliens (Friendly, Enemy) im Spiel.
@@ -15,9 +17,10 @@ public abstract class Alien implements Serializable{
     // konsistent bleibt und Versionierungsprobleme vermieden werden.
     private static final long serialVersionUID = 1729389822767173584L;
 
-    private String name; 
-    private int lifePoints;
-    private boolean friendly; 
+    public String name; 
+    public int lifePoints = 10;
+    public boolean friendly;
+    public String greeting;
 
     /**
      * Konstruktor für ein Alien.
@@ -25,14 +28,10 @@ public abstract class Alien implements Serializable{
      * @param lifePoints
      * @param friendly
      */
-    public Alien(String name, int lifePoints, boolean friendly) {
-        this.name = name;
-        this.lifePoints = lifePoints;
-        this.friendly = friendly;
+    public Alien() {
+        lifePoints = 10;
     }
         // Getter
-
-
         /**
          * Getter für den Namen des Aliens.
          * @return name
@@ -50,7 +49,7 @@ public abstract class Alien implements Serializable{
          * Getter, ob das Alien freundlich ist.
          * @return friendly
          */
-        public boolean isFriendly() { return friendly; }
+        public boolean getFriendly() { return friendly; }
 
         // Setter
 
@@ -72,4 +71,18 @@ public abstract class Alien implements Serializable{
         * @param friendly
         */
         public void setFriendly(boolean friendly) { this.friendly = friendly; }
+
+        public void takeDamage(int amount){
+            this.lifePoints -= amount;
+            System.out.println("Your enemy takes " +amount+ " damage! It only has " +lifePoints+ " HP left, keep going!");
+        }
+
+        public boolean isDefeated() {
+            if (this.lifePoints <= 0) {
+                this.lifePoints = 0;
+                return true;
+            }
+            return false;
+        }
+
 }
