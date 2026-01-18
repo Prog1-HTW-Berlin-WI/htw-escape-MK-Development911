@@ -77,6 +77,10 @@ public abstract class Alien implements Serializable{
             System.out.println("Your enemy takes " +amount+ " damage! It only has " +lifePoints+ " HP left, keep going!");
         }
 
+        /**
+         * Überprüft, ob das Alien besiegt wurde.
+         * @return true, wenn die Lebenspunkte 0 sind, sonst false
+         */
         public boolean isDefeated() {
             if (this.lifePoints <= 0) {
                 this.lifePoints = 0;

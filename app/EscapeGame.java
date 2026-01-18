@@ -45,6 +45,9 @@ public class EscapeGame {
             }
         }
     }
+    /** 
+     * Lässt den Spieler einen Namen für den Helden wählen.
+    */
     public void chooseName(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Before you can start your journey, please choose a name for your Hero: ");
@@ -96,6 +99,9 @@ public class EscapeGame {
         } 
     }
 
+    /** 
+     * Zeigt das Spielmenü an.
+    */
     private void showGameMenu() {
         System.out.println("Game Menu:");
         System.out.println("[E] Explore HTW");
@@ -106,6 +112,9 @@ public class EscapeGame {
         System.out.println("Choose an option: ");
     }
 
+    /**
+     *Verarbeitet die Eingaben im Spielmenü. 
+     */
     private void gameMenu() {
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine().toUpperCase();
@@ -187,7 +196,9 @@ public class EscapeGame {
         this.gameFinished = gameFinished;
     }
 
-
+    /**
+     * Lässt den Helden einen zufälligen Raum betreten und verarbeitet Ereignisse darin.
+     */
     private void enterRandomRoom() {
         int randomIndex = (int) (Math.random() * rooms.length);
         HTWRoom selectedRoom = rooms[randomIndex];
@@ -247,6 +258,10 @@ public class EscapeGame {
         }
     }
 
+    /**
+     * Verarbeitet die Eingaben für die Begegnungen mit Butters (friendly Alien).
+     * 
+     */
     public void friendlyInputHandler(){
             Scanner scanner = new Scanner(System.in);
             String choice = scanner.nextLine();
@@ -265,7 +280,9 @@ public class EscapeGame {
                     break;
                 }
         }
-
+        /**
+         * Verarbeitet die Eingaben für die Begegnungen mit feindlichen Aliens (ManRay).
+         */
         public void hostileInputHandler(){
             Scanner scanner = new Scanner(System.in);
             String choice = scanner.nextLine();
@@ -285,7 +302,9 @@ public class EscapeGame {
                     break;
                 }
         }
-
+        /**
+         * Verarbeitet die Eingaben für das Kampfmenü gegen feindliche Aliens.
+         */
         public void combatMenu(){
             System.out.println("Press [1] to attack!");
             Scanner scanner = new Scanner(System.in);
@@ -304,7 +323,10 @@ public class EscapeGame {
                     break;
             }
         } 
-
+        /**
+         * Beendet das Spiel, wenn alle Unterschriften gesammelt wurden.
+         * @return true, wenn das Spiel beendet ist, sonst false
+         */
         public boolean endGame() {
             if(hero.getAllSignaturesCollected()) {
         System.out.println("Congratulations! You have collected all signatures and escaped HTW!");
