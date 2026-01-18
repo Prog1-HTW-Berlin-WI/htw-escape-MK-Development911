@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Lecturer implements Serializable {
 
     private String name;
-    private boolean hasSigned = false;
+    private boolean hasSigned = false; 
 
     /**
      * Gibt den namen des Lecturer zurueck

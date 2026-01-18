@@ -3,6 +3,7 @@ package app;
 import java.util.Scanner;
 import model.HTWRoom;
 import model.Hero;
+import model.Lecturer;
 
 /**
 * Klasse für die notwendigen Elemente und Aufrufe des Spiels.
@@ -12,7 +13,7 @@ import model.Hero;
 
 public class EscapeGame {
     private final Hero hero;
-    private final HTWRoom[] rooms = new HTWRoom[3];
+    private HTWRoom[] rooms = new HTWRoom[24];
     private boolean gameRunning = true;
     private boolean gameFinished = false;
     private final int MAX_ROUNDS = 24;
@@ -23,6 +24,12 @@ public class EscapeGame {
      */
     public EscapeGame() {
         this.hero = new Hero();
+        this.rooms = new HTWRoom[24];
+        for (int i = 0; i < rooms.length; i++) {
+            rooms[i] = new HTWRoom();
+            rooms[i].setIdentifier("Room A0" + (i + 19));
+            rooms[i].setDescription("Room" + (i + 19) + " looks dusty.");
+        }
     }
     public void chooseName(){
         Scanner scanner = new Scanner(System.in);
@@ -65,10 +72,14 @@ public class EscapeGame {
      * Enthält momentan nur die Runden- und Regenerationslogik.
     */
     public void gameloop() {
-        while (isGameRunning() && !isGameFinished()) {
+        while (isGameRunning() && !isGameFinished() && !isGameOver() && !endGame()) {
             System.out.println("Round " + (rounds + 1) + " begins.");
                 showGameMenu();
                 gameMenu();
+            if (isGameOver() || isGameFinished() || endGame()) {
+                System.exit(0);
+            }
+            
             
  }
         boolean longRest = true;
@@ -103,25 +114,21 @@ public class EscapeGame {
                 System.out.println("There are two rooms in front of you: Room A and Room B. Which one do you want to enter? (A/B)");
                 String roomChoice = scanner.nextLine().toUpperCase();
                 rounds++;
-                if (roomChoice.equals("A")) {
-                    System.out.println("You have entered Room A.");
-                } else if (roomChoice.equals("B")) {
-                    System.out.println("You have entered Room B.");
-                } else {
-                    System.out.println("Invalid room choice.");
-                }
+
+                
+                if (roomChoice.equals("A") || roomChoice.equals("B")) {
+                    enterRandomRoom();
+                } 
                 break;
             case "H":
                 System.out.println("Hero Status:");
                 System.out.println("Name: " + hero.getName());
                 System.out.println("HP: " + hero.getHp() + "/" + hero.getMaxHP());
                 System.out.println("XP: " + hero.getXp()); 
-                // Placeholder for showing signatures logic
+                hero.showSignatures();
                 break;
             case "S":
-                System.out.println("Showing signatures...");
-                // Placeholder for showing signatures logic
-
+                hero.showSignatures();
                 break;
             case "R":
                 System.out.println("Do you want to take a long rest (1) or a short rest (2)?");
@@ -175,5 +182,57 @@ public class EscapeGame {
     */
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
+    }
+
+
+    private void enterRandomRoom() {
+        int randomIndex = (int) (Math.random() * rooms.length);
+        HTWRoom selectedRoom = rooms[randomIndex];
+        System.out.println("You have entered the room:" + selectedRoom.getIdentifier());
+
+        double eventChance = Math.random();
+
+        double alienChance = 0.52;
+
+        double lecturerChance = 0.28;
+
+        if (eventChance < alienChance) {
+            System.out.println("An alien appears!");
+            // Placeholder for alien encounter logic
+        } else if (eventChance < alienChance + lecturerChance) {
+            String[] lecturerNames = {"Mrs. Safitri", "Mr. Poeser", "Mrs. Vaseva", "Mrs. Gaertner", "Mrs. Gnaoui"};
+            int lecturerIndex = (int) (Math.random() * lecturerNames.length);
+            String lecturerName = lecturerNames [lecturerIndex];
+
+            Lecturer lecturer = new Lecturer();
+            lecturer.setName(lecturerName);
+            selectedRoom.setLecturer(lecturer);
+
+            if (hero.hasSigned(lecturerName)) {
+            System.out.println("Lecturer " + lecturerName + " has already signed and went away. Nothing more to do here.");
+            return;
+            }
+
+            System.out.println("You encounter Lecturer " + lecturer.getName() + "!");
+            System.out.println("Do you want to try to get a signature from " + lecturer.getName() + "? (Y/N)");
+            Scanner scanner = new Scanner(System.in);
+            String signChoice = scanner.nextLine().toUpperCase();
+            if (signChoice.equals("Y")) {
+                lecturer.sign();
+            }
+                if (lecturer.getHasSigned()) {
+                    hero.signedExerciseLeaders(lecturer);
+                } else {
+                System.out.println("You chose not to interact with " + lecturer.getName() + ".");
+            }
+        }
+    }
+
+        public boolean endGame() {
+            if(hero.getAllSignaturesCollected()) {
+        System.out.println("Congratulations! You have collected all signatures and escaped HTW!");
+        setGameFinished(true);
+        }
+        return isGameFinished();
     }
 }

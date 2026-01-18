@@ -19,7 +19,7 @@ public class Hero implements Serializable {
     private int hp = 50;
     private int maxHP = 50;
     private int xp = 0;
-    private String[] signedExerciseLeaders;
+    private String[] signedExerciseLeaders = new String[5];
     private EscapeGame game;
     private int healAmountLong = 10;
     private int healAmountShort = 3;
@@ -114,6 +114,7 @@ public class Hero implements Serializable {
             this.hp = this.maxHP;
         }
     }
+
     /**
      * Versucht, dem Kampf zu entkommen.
      * @return true, wenn die Flucht erfolgreich war, sonst false
@@ -173,6 +174,32 @@ public class Hero implements Serializable {
             }
         }
     }
+    
+    public boolean hasSigned(String lecturerName) {
+        for (int i = 0; i < signedExerciseLeaders.length; i++) {
+            if (signedExerciseLeaders[i] != null && signedExerciseLeaders[i].equals(lecturerName)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
+    
+    /** 
+     * Zeigt die gesammelten Unterschriften an.
+    */
+    public void showSignatures() {
+        System.out.println("Signatures collected from:");
+        for (int i = 0; i < signedExerciseLeaders.length; i++) {
+            if (signedExerciseLeaders[i] != null) {
+                System.out.println((i + 1) + ". " + signedExerciseLeaders[i]);
+            } else {
+                System.out.println((i + 1) + ". [ ]");
+            }
+        }
+    }
     /** 
      * Fügt dem Helden Erfahrungspunkte hinzu.
      * @param xp die hinzuzufügenden Erfahrungspunkte
@@ -188,5 +215,14 @@ public class Hero implements Serializable {
     */
     public boolean isOperational() {
         return this.hp > 0; 
+    }
+
+    public boolean getAllSignaturesCollected() {
+        for( int i = 0; i < signedExerciseLeaders.length; i++) {
+            if (signedExerciseLeaders[i] == null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

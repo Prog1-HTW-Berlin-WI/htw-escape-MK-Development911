@@ -61,6 +61,8 @@ public class HTWRoom implements Serializable {
         this.lecturer = lecturer;
     }
 
+    
+
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der
     // Speicherung als Datei (Serialisierung) und beim Laden (Deserialisierung)
     // konsistent bleibt und Versionierungsprobleme vermieden werden.
