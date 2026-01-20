@@ -24,6 +24,7 @@ public class EscapeGame {
     private Hostile enemy;
     //TODO koennen vllt bei den einen gespeichert werden & objekt loeschen wenn defeated
     private Friendly alien;
+    private int regenCounter = 0;
     
     /**
      * Konstruktor der EscapeGame-Klasse.
@@ -60,7 +61,9 @@ public class EscapeGame {
      * Startet das Spiel.
     */
     public void run() {
-        chooseName();
+        if(!hero.hasName()) {
+            chooseName();
+        }
         gameloop();
     }
     /** 
@@ -90,7 +93,9 @@ public class EscapeGame {
     */
     public void gameloop() {
         while (isGameRunning() && !isGameFinished() && !isGameOver() && !endGame()) {
+            System.out.println("==================================");
             System.out.println("Round " + (rounds + 1) + " begins.");
+            System.out.println("==================================");
                 showGameMenu();
                 gameMenu();
             if (isGameOver() || isGameFinished() || endGame()) {
@@ -109,6 +114,7 @@ public class EscapeGame {
         System.out.println("[S] Show signatures");
         System.out.println("[R] Rest");
         System.out.println("[L] Leave Game");
+        System.out.println("[M] Main Menu");
         System.out.println("Choose an option: ");
     }
 
@@ -116,17 +122,22 @@ public class EscapeGame {
      *Verarbeitet die Eingaben im Spielmenü. 
      */
     private void gameMenu() {
+        System.out.println("");
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine().toUpperCase();
         switch (choice) {
             case "E":
-                System.out.println("Exploring HTW...");
+                System.out.println("");
+                System.out.println("You're exploring the HTW...");
                 System.out.println("There are two rooms in front of you: Room A and Room B. Which one do you want to enter? (A/B)");
+                System.out.println("");
                 String roomChoice = scanner.nextLine().toUpperCase();
                 if (roomChoice.equals("A") || roomChoice.equals("B")) {
                     enterRandomRoom();
                     rounds++;
+                    regenCounter = 0;
                 } else {
+                    System.out.println("");
                     System.out.println("Invalid choice, try going either way [A] or [B]");
                 }
                 break;
@@ -146,15 +157,25 @@ public class EscapeGame {
                 if (restChoice.equals("1")) {
                     hero.regenerate(true);
                     rounds++;
-                } else if (restChoice.equals("2")) {
+                } else if (regenCounter != 1 && restChoice.equals("2")) {
                     hero.regenerate(false);
-                } else {
+                    regenCounter++;
+                } 
+                else {
+                    if (regenCounter == 1 && restChoice.equals("2")) {
+                        System.out.println("You can only short rest once per round!" +"\n"+ "No HP recovered.");
+                    } else {
                     System.out.println("Invalid choice. No rest taken, try choosing either [1] or [2].");
+                    }
                 }
                 break;
             case "L":
                 System.out.println("You left the game, Hero! See you next time!");
                 setGameRunning(false);
+                break;
+            case "M":
+                System.out.println("Das Spiel wird pausiert...");
+                setGameRunning(false); 
                 break;
             default:
                 System.out.println("Invalid choice. Please try using either option [E], [H], [S], [R] or [L].");
@@ -174,7 +195,9 @@ public class EscapeGame {
             return true;
         }
         if (rounds >= MAX_ROUNDS) {
+            System.out.println("==================================");
             System.out.println("Game Over! You have run out of time.");
+            System.out.println("==================================");
             System.out.println("Mrs. Majuntke boards her ship and leaves!");
             System.exit(0);
             return true;
@@ -202,6 +225,7 @@ public class EscapeGame {
     private void enterRandomRoom() {
         int randomIndex = (int) (Math.random() * rooms.length);
         HTWRoom selectedRoom = rooms[randomIndex];
+        System.out.println("");
         System.out.println("You have entered " + selectedRoom.getIdentifier() + selectedRoom.getDescription());
         
         double eventChance = Math.random();
@@ -210,10 +234,10 @@ public class EscapeGame {
 
         double lecturerChance = 0.28;
 
-        double nothing = 0.20;
-
         if (eventChance < alienChance) {
+            System.out.println("");
             System.out.println("An Alien appears!");
+            System.out.println("");
             boolean friendly = Math.random() < 0.50;
             if (friendly){
                 alien = new Friendly();
@@ -227,7 +251,7 @@ public class EscapeGame {
             }
             
         } else if (eventChance < alienChance + lecturerChance) {
-            String[] lecturerNames = {"Mrs. Safitri", "Mr. Poeser", "Mrs. Vaseva", "Mrs. Gaertner", "Mrs. Gnaoui"};
+            String[] lecturerNames = {"Mrs. Safitri", "Mr. Poeser", "Mrs. Vaseva", "Mrs. Gaertner", "Mr. Gnaoui"};
             int lecturerIndex = (int) (Math.random() * lecturerNames.length);
             String lecturerName = lecturerNames [lecturerIndex];
 
@@ -236,11 +260,13 @@ public class EscapeGame {
             selectedRoom.setLecturer(lecturer);
 
             if (hero.hasSigned(lecturerName)) {
+            System.out.println(""); 
             System.out.println("Lecturer " + lecturerName + " has already signed and went away. Nothing more to do here.");
             return;
             }
 
             System.out.println("You encounter Lecturer " + lecturer.getName() + "!");
+            System.out.println(""); 
             System.out.println("Do you want to try to get a signature from " + lecturer.getName() + "? (Y/N)");
             Scanner scanner = new Scanner(System.in);
             String signChoice = scanner.nextLine().toUpperCase();
@@ -250,10 +276,12 @@ public class EscapeGame {
                 if (lecturer.getHasSigned()) {
                     hero.signedExerciseLeaders(lecturer);
                 } else {
+                System.out.println(""); 
                 System.out.println("You chose not to interact with " + lecturer.getName() + ".");
             }
         }
         else {
+            System.out.println(""); 
             System.out.println("There's nobody here.");
         }
     }
@@ -306,20 +334,23 @@ public class EscapeGame {
          * Verarbeitet die Eingaben für das Kampfmenü gegen feindliche Aliens.
          */
         public void combatMenu(){
-            System.out.println("Press [1] to attack!");
+            System.out.println("Press [1] to fight!");
             Scanner scanner = new Scanner(System.in);
             String choice = scanner.nextLine();
             switch (choice){
                 case "1":
                     while (!enemy.isDefeated()) {
                         enemy.takeDamage(hero.attack());
+                        System.out.println("");
                         hero.takeDamage(enemy.attack());
+                        System.out.println("");
                 }   if (enemy.isDefeated()) {
+                        System.out.println("");
                         System.out.println(hero.getName()+ " has gained " +hero.addExperiencePoints(5)+ "XP! Good job!");
                         enemy = null;
                 }   break;
                 default:
-                    System.out.println("Wrong input, please try to use \"attack\".");
+                    System.out.println("Wrong input, please try to use \"fight\".");
                     break;
             }
         } 

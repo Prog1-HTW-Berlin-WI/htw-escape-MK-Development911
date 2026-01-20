@@ -39,7 +39,7 @@ public class EscapeApp {
         System.out.println("========================================" +"\n");
         
         System.out.println("========================================");
-        System.out.println("Welcome to the HTW escape");
+        System.out.println("Welcome to the HTW Escape | Main Menu ");
         System.out.println("========================================\n");
 
         EscapeApp app = new EscapeApp();
@@ -54,17 +54,15 @@ public class EscapeApp {
     /** 
      * Zeigt das Hauptmenü an. 
     */
-    private void showMainMenu() {
-        System.out.println("You're in the main menu");
-        System.out.println("What do you want to do next?");
+    private void showMainMenu() { 
         System.out.println("(1) Start new game");
-        if(hasSavedGame()){
+        if(isGameRunning()){
             System.out.println("(2) Resume game");
         } 
         if (hasSavedGame()){
         System.out.println("(3) Load saved game");
         }
-        if (hasSavedGame()) {
+        if (isGameRunning()) {
             System.out.println("(4) Save game");
         }
         if (hasSavedGame()) {

@@ -16,6 +16,7 @@ public class Friendly extends Alien {
          * Interaktion mit dem freundlichen Alien Butters.
          */
         public void butters(){
+                System.out.println(greeting);
                 System.out.println("This Alien seems friendly...Do you want to ask for Help (1) or Flee? (2)");   
         }
 }

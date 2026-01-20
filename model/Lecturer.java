@@ -11,6 +11,7 @@ public class Lecturer implements Serializable {
 
     private String name;
     private boolean hasSigned = false; 
+    private String lecturerSpeciality;
 
     /**
      * Gibt den namen des Lecturer zurueck
@@ -49,6 +50,14 @@ public class Lecturer implements Serializable {
     // konsistent bleibt und Versionierungsprobleme vermieden werden.
     private static final long serialVersionUID = 540082607047283589L;
 
+    public String getLecturerSpeciality(){
+        return this.lecturerSpeciality;
+    }
+
+    public void setLecturerDescription(String lecturerSpeciality){
+        this.lecturerSpeciality = lecturerSpeciality;
+    }
+    
     /** 
      * Gibt an, ob Lecturer bereit ist zu Unterschreiben (noch ohne bedingung, vielleicht ändern?)
      * return true (er ist !noch! jederzeit bereit)

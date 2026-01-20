@@ -17,6 +17,7 @@ public class Hostile extends Alien {
          * Interaktion mit dem feindlichen Alien
          */
         public void manRay(){
+                System.out.println(greeting);
                 System.out.println("This Alien seems Hostile! Do you want to Fight (1) or Flee? (2)");
         }
 

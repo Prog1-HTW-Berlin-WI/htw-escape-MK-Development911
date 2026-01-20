@@ -226,4 +226,11 @@ public class Hero implements Serializable {
         }
         return true;
     }
+
+    public boolean hasName(){
+        if(this.name != null) {
+            return true;
+        } 
+        return false;
+    } 
 }
