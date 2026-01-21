@@ -174,7 +174,7 @@ public class EscapeGame {
                 setGameRunning(false);
                 break;
             case "M":
-                System.out.println("Das Spiel wird pausiert...");
+                System.out.println("The game has been paused...");
                 setGameRunning(false); 
                 break;
             default:
@@ -295,7 +295,9 @@ public class EscapeGame {
             String choice = scanner.nextLine();
             switch (choice){
                 case "1":
+                    System.out.println("");
                     System.out.println("I see, you were trapped here...I saw Prof. Majuntke arrive in a spaceship herself, " +"\n"+ "maybe she isn't all she seems to be..");
+                    System.out.println("");
                     break;
                 case "2":
                     if (hero.flee() == false) {
