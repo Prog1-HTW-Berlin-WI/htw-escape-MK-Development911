@@ -19,6 +19,7 @@ public class Hostile extends Alien {
         public void manRay(){
                 System.out.println(greeting);
                 System.out.println("This Alien seems Hostile! Do you want to Fight (1) or Flee? (2)");
+                System.out.println("");
         }
 
     /** 

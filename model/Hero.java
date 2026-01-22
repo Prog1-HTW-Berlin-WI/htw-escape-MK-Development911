@@ -3,11 +3,12 @@ package model;
 import java.io.Serializable;
 import app.EscapeGame;
 
-/** 
+/**
  * Klasse für den Helden im Spiel.
+ * 
  * @author Sophie Amrollah Majdabadi
  * @author Marvin Kühne
-*/
+ */
 public class Hero implements Serializable {
 
     // Bitte serialVersionUID beibehalten, damit die Klasse bei der
@@ -26,71 +27,81 @@ public class Hero implements Serializable {
 
     /**
      * Gibt namen des Heroes zurueck
+     * 
      * @return der Name
      */
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     /**
      * Setzt den Namen des Heroes fest
+     * 
      * @param name der neue Name
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
     /**
      * Gibt HP zurueck
+     * 
      * @return Anzahl an HP
      */
-    public int getHp(){
+    public int getHp() {
         return this.hp;
     }
 
     /**
      * Setzt HP fest
+     * 
      * @param hp neue HP Wert
      */
-    public void setHp(int hp){
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
     /**
      * Gibt den maximalen HP Wert zurueck
+     * 
      * @return Anzahl maximaler HP
      */
-    public int getMaxHP(){
+    public int getMaxHP() {
         return this.maxHP;
     }
-     /**
-      * Setzt die maximalen HP fest
-      * @param maxHP neue maximale HP Wert
-      */
-    public void setMaxHP(int maxHP){
+
+    /**
+     * Setzt die maximalen HP fest
+     * 
+     * @param maxHP neue maximale HP Wert
+     */
+    public void setMaxHP(int maxHP) {
         this.maxHP = maxHP;
     }
 
     /**
      * Gibt die Anzahl an XP zurueck
+     * 
      * @return Anzahl der XP
      */
-    public int getXp(){
+    public int getXp() {
         return this.xp;
     }
 
     /**
      * Setzt die XP fest
+     * 
      * @param xp neue Wert fuer XP
      */
-    public void setXp(int xp){
+    public void setXp(int xp) {
         this.xp = xp;
     }
 
-    /** 
+    /**
      * Nimmt Schaden am Helden.
+     * 
      * @param damage der zugefügte Schaden
-    */
+     */
     public void takeDamage(int damage) {
         this.hp -= damage;
         if (this.hp < 0) {
@@ -98,17 +109,22 @@ public class Hero implements Serializable {
         }
         System.out.println(name + " takes " + damage + " damage. Current HP: " + hp + "/" + maxHP);
     }
-    /**       
-    * Regeneriert die HP des Helden.
-    * @param longRest true für lange Pause (volle Heilung), false für kurze Pause (teilweise Heilung)
-    */
+
+    /**
+     * Regeneriert die HP des Helden.
+     * 
+     * @param longRest true für lange Pause (volle Heilung), false für kurze Pause
+     *                 (teilweise Heilung)
+     */
     public void regenerate(boolean longRest) {
         if (longRest) {
             this.hp += healAmountLong;
-            System.out.println(name + " takes a long rest and regenerates to " + hp + "/" + maxHP + " HP. You have lost a round.");
-            } else {
+            System.out.println(
+                    name + " takes a long rest and regenerates to " + hp + "/" + maxHP + " HP. You have lost a round.");
+        } else {
             this.hp += healAmountShort;
-            System.out.println(name + " takes a short rest and regenerates to " + hp + "/" + maxHP + " HP. No round lost.");
+            System.out.println(
+                    name + " takes a short rest and regenerates to " + hp + "/" + maxHP + " HP. No round lost.");
         }
         if (this.hp > this.maxHP) {
             this.hp = this.maxHP;
@@ -117,6 +133,7 @@ public class Hero implements Serializable {
 
     /**
      * Versucht, dem Kampf zu entkommen.
+     * 
      * @return true, wenn die Flucht erfolgreich war, sonst false
      */
     public boolean flee() {
@@ -124,39 +141,47 @@ public class Hero implements Serializable {
         boolean success = Math.random() < 0.42;
 
         if (success) {
-            System.out.println(name + " successfully flees from the encounter! " +name+ " Has gained " +addExperiencePoints(1)+ "XP.");
+            System.out.println("");
+            System.out.println(name + " successfully flees from the encounter! " + name + " Has gained "
+                    + addExperiencePoints(1) + "XP.");
         } else {
+            System.out.println("");
             System.out.print(name + " failed to flee!");
         }
         return success;
     }
-    /** 
-     * Führt einen Angriff durch. Außerdem: Berechnung von kritischen Treffern und Fehlschlägen.
+
+    /**
+     * Führt einen Angriff durch. Außerdem: Berechnung von kritischen Treffern und
+     * Fehlschlägen.
+     * 
      * @return der verursachte Schaden
-    */
+     */
 
     public int attack() {
-    double chance = Math.random();
-    
-    if(chance < 0.13) {
-        System.out.println(name + " misses the attack!");
-        return 0;
+        double chance = Math.random();
+
+        if (chance < 0.13) {
+            System.out.println(name + " misses the attack!");
+            return 0;
+        }
+
+        int damage = (int) (this.xp * 2.3 + 1);
+
+        if (chance >= 0.13 && chance < 0.25) {
+            damage *= 2;
+            System.out.println(name + " lands a critical hit! DOUBLE DAMAGE");
+        }
+        System.out.println(name + " attacks and deals " + damage + " damage.");
+        return damage;
     }
 
-    int damage = (int) (this.xp * 2.3 + 1);
-
-    if (chance >= 0.13 && chance < 0.25) {
-        damage *= 2;
-        System.out.println(name + " lands a critical hit! DOUBLE DAMAGE");
-    }
-    System.out.println(name + " attacks and deals " + damage + " damage.");
-    return damage;
-}
-    /** 
+    /**
      * Unterschreibt bei einem Übungsleiter.
+     * 
      * @param lecturer der Übungsleiter, der unterschreibt
      * @return TBD
-    */
+     */
     public void signedExerciseLeaders(Lecturer lecturer) {
         String lecName = lecturer.getName();
 
@@ -175,7 +200,7 @@ public class Hero implements Serializable {
             }
         }
     }
-    
+
     public boolean hasSigned(String lecturerName) {
         for (int i = 0; i < signedExerciseLeaders.length; i++) {
             if (signedExerciseLeaders[i] != null && signedExerciseLeaders[i].equals(lecturerName)) {
@@ -186,11 +211,9 @@ public class Hero implements Serializable {
         return false;
     }
 
-
-    
-    /** 
+    /**
      * Zeigt die gesammelten Unterschriften an.
-    */
+     */
     public void showSignatures() {
         System.out.println("Signatures collected from:");
         for (int i = 0; i < signedExerciseLeaders.length; i++) {
@@ -201,25 +224,29 @@ public class Hero implements Serializable {
             }
         }
     }
-    /** 
+
+    /**
      * Fügt dem Helden Erfahrungspunkte hinzu.
+     * 
      * @param xp die hinzuzufügenden Erfahrungspunkte
      * @return die neuen Erfahrungspunkte
-    */
+     */
     public int addExperiencePoints(int experience) {
         this.xp += experience;
         return experience;
     }
-    /** 
+
+    /**
      * Prüft, ob der Held noch betriebsbereit ist (HP > 0).
+     * 
      * @return true, wenn der Held betriebsbereit ist, sonst false
-    */
+     */
     public boolean isOperational() {
-        return this.hp > 0; 
+        return this.hp > 0;
     }
 
     public boolean getAllSignaturesCollected() {
-        for( int i = 0; i < signedExerciseLeaders.length; i++) {
+        for (int i = 0; i < signedExerciseLeaders.length; i++) {
             if (signedExerciseLeaders[i] == null) {
                 return false;
             }
@@ -227,10 +254,10 @@ public class Hero implements Serializable {
         return true;
     }
 
-    public boolean hasName(){
-        if(this.name != null) {
+    public boolean hasName() {
+        if (this.name != null) {
             return true;
-        } 
+        }
         return false;
-    } 
+    }
 }
