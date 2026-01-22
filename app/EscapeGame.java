@@ -254,11 +254,11 @@ public class EscapeGame {
         System.out.println("");
         System.out.println("You have entered " + selectedRoom.getIdentifier() + selectedRoom.getDescription());
 
-        double eventChance = 0.3;
+        double eventChance = Math.random();
 
-        double alienChance = 0.0; // 0.52
+        double alienChance = 0.52;
 
-        double lecturerChance = 0.5; // 0.28
+        double lecturerChance = 0.28; 
 
         if (eventChance < alienChance) {
             System.out.println("");
