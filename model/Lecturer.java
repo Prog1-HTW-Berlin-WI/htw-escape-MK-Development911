@@ -65,16 +65,15 @@ public class Lecturer implements Serializable {
     }
 
     /**
-     * Gibt an, ob Lecturer bereit ist zu Unterschreiben (noch ohne bedingung,
-     * vielleicht ändern?)
-     * return true (er ist !noch! jederzeit bereit)
+     * Gibt an, ob Lecturer bereit ist zu Unterschreiben 
+     * @return true er ist immer bereit zu Unterschreiben
      */
     public boolean isReadyToSign(Lecturer lecturer) {
         return true;
     }
 
     /**
-     * Lecturer unterschreibt, wenn bedingung true ist
+     * Lecturer unterschreibt den Laufzettel, wenn bedingung true ist
      */
     public void sign() {
         if (isReadyToSign(Lecturer.this)) {

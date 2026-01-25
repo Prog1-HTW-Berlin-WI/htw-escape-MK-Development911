@@ -111,8 +111,8 @@ public class Hero implements Serializable {
     /**
      * Regeneriert die HP des Helden.
      * 
-     * @param longRest true für lange Pause (volle Heilung), false für kurze Pause
-     *                 (teilweise Heilung)
+     * @param longRest true für lange Pause (10HP Heilung), false für kurze Pause
+     *                 (3HP Heilung)
      */
     public void regenerate(boolean longRest) {
         if (longRest) {

@@ -90,10 +90,13 @@ public abstract class Alien implements Serializable {
         this.friendly = friendly;
     }
 
+    /**
+     * Misst den verursachten Schaden gegen ein Alien
+     * @param amount die Menge an Schaden
+     */
     public void takeDamage(int amount) {
         this.lifePoints -= amount;
-        System.out
-                .println("Your enemy takes " + amount + " damage! It only has " + lifePoints + " HP left, keep going!");
+        System.out.println("Your enemy takes " + amount + " damage! It only has " + lifePoints + " HP left, keep going!");
     }
 
     /**

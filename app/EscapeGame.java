@@ -1,12 +1,11 @@
 package app;
 
 import java.util.Scanner;
+import model.Friendly;
 import model.HTWRoom;
 import model.Hero;
-import model.Lecturer;
-import model.Alien;
-import model.Friendly;
 import model.Hostile;
+import model.Lecturer;
 
 /**
  * Klasse für die notwendigen Elemente und Aufrufe des Spiels.
@@ -97,8 +96,7 @@ public class EscapeGame {
     }
 
     /**
-     * Hauptspielschleife.
-     * Enthält momentan nur die Runden- und Regenerationslogik.
+     * Hauptspielschleife, läuft solange bis das spiel beendet ist, das end Game besiegt worden ist oder der Hero gefallen ist.
      */
     public void gameloop() {
         while (isGameRunning() && !isGameFinished() && !isGameOver() && !endGame()) {
@@ -195,9 +193,10 @@ public class EscapeGame {
     }
 
     /**
-     * Prüft, ob ein GameOver eingetreten ist.
+     * Prüft, ob ein GameOver (max. and Runden erreicht ist, Multiple choice 2 mal falsch
+     * beantwortet wurde oder der Hero gefallen ist) eingetreten sind.
      * 
-     * @return true, wenn das Spiel durch maximale Runden oder HP = 0 vorbei ist,
+     * @return true, wenn das Spiel durch maximale Runden, HP = 0 oder falscher Antworten vorbei ist,
      *         sonst false
      */
     public boolean isGameOver() {
@@ -224,12 +223,11 @@ public class EscapeGame {
             return true;
         }
         return false;
-
-        /**
-         * Prüft, ob das Spiel beendet ist.
-         */
     }
 
+     /**
+     * Prüft, ob das Spiel beendet ist.
+     */
     public boolean isGameFinished() {
         if (gameFinished == true) {
             System.exit(0);
@@ -426,7 +424,7 @@ public class EscapeGame {
     }
 
     /**
-     * Beendet das Spiel, wenn alle Unterschriften gesammelt wurden.
+     * Beendet das Spiel, wenn alle Unterschriften gesammelt wurden und beginnt die Multiple choice abfrage.
      * 
      * @return true, wenn das Spiel beendet ist, sonst false
      */
@@ -445,14 +443,14 @@ public class EscapeGame {
     public void majuntke() {
         System.out.println("");
         System.out.println("You leave the room and Prof Majuntke stands in the hallway." + "\n" +
-                "So you collected all the signatures, huh? If you get the next question right, you're allowed to leave!");
+        "So you collected all the signatures, huh? If you get the next question right, you're allowed to leave!");
         System.out.println("If your answer is wrong two times, you'll have to stay here forever.");
         System.out.println("");
     }
 
     /**
      * Methode für das Menü im Endgame, wenn der Gameloop verlassen wurde nachdem
-     * alle Überschriften gesammelt wurden.
+     * alle Unterschriften gesammelt wurden.
      */
     public void endgameMenu() {
 
