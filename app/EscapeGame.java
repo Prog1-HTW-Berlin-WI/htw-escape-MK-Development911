@@ -96,7 +96,7 @@ public class EscapeGame {
     }
 
     /**
-     * Hauptspielschleife, läuft solange bis das spiel beendet ist, das end Game besiegt worden ist oder der Hero gefallen ist.
+     * Hauptspielschleife, läuft solange bis das spiel beendet, das end Game erreicht oder der Hero gefallen ist.
      */
     public void gameloop() {
         while (isGameRunning() && !isGameFinished() && !isGameOver() && !endGame()) {
@@ -424,8 +424,7 @@ public class EscapeGame {
     }
 
     /**
-     * Beendet das Spiel, wenn alle Unterschriften gesammelt wurden und beginnt die Multiple choice abfrage.
-     * 
+     * startet das Endgame, wenn alle Unterschriften gesammelt wurden und beginnt die Multiple-Choice Abfrage. 
      * @return true, wenn das Spiel beendet ist, sonst false
      */
     public boolean endGame() {
