@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import app.EscapeGame;
 
 /**
  * Klasse für den Helden im Spiel.
@@ -21,7 +20,6 @@ public class Hero implements Serializable {
     private int maxHP = 50;
     private int xp = 0;
     private String[] signedExerciseLeaders = new String[5];
-    private EscapeGame game;
     private int healAmountLong = 10;
     private int healAmountShort = 3;
 
@@ -180,7 +178,7 @@ public class Hero implements Serializable {
      * Unterschreibt bei einem Übungsleiter.
      * 
      * @param lecturer der Übungsleiter, der unterschreibt
-     * @return TBD
+     * @return bleibt leer.
      */
     public void signedExerciseLeaders(Lecturer lecturer) {
         String lecName = lecturer.getName();
@@ -245,6 +243,13 @@ public class Hero implements Serializable {
         return this.hp > 0;
     }
 
+    /**
+     * Prüft ob alle Unterschriften gesammelt sind, essenziell für den Gameloop +
+     * Endgame
+     * 
+     * @return false, wenn nicht
+     * @return true, falls ja, danach endgame.
+     */
     public boolean getAllSignaturesCollected() {
         for (int i = 0; i < signedExerciseLeaders.length; i++) {
             if (signedExerciseLeaders[i] == null) {
@@ -254,6 +259,12 @@ public class Hero implements Serializable {
         return true;
     }
 
+    /**
+     * prüft ob der Held bereits einen Namen hat, wenn ja
+     * 
+     * @return true
+     * @return false wenn nicht.
+     */
     public boolean hasName() {
         if (this.name != null) {
             return true;

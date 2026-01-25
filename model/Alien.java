@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Scanner;
 import java.io.Serializable;
-import model.Hero;
 
 /**
  * Abstrakte Klasse für alle Aliens (Friendly, Enemy) im Spiel.

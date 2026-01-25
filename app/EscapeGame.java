@@ -58,7 +58,7 @@ public class EscapeGame {
         hero.setName(heroName);
         System.out.println("");
         System.out.println("Your name has been set to " + heroName
-        + ". Your journey begins now, Try to find Miss Majuntke and Escape HTW!");
+                + ". Your journey begins now, Try to find Miss Majuntke and Escape HTW!");
     }
 
     /**
@@ -140,7 +140,8 @@ public class EscapeGame {
             case "E":
                 System.out.println("");
                 System.out.println("You're exploring the HTW...");
-                System.out.println("There are two rooms in front of you: Room A and Room B. Which one do you want to enter? (A/B)");
+                System.out.println(
+                        "There are two rooms in front of you: Room A and Room B. Which one do you want to enter? (A/B)");
                 System.out.println("");
                 String roomChoice = scanner.nextLine().toUpperCase();
                 if (roomChoice.equals("A") || roomChoice.equals("B")) {
@@ -230,7 +231,7 @@ public class EscapeGame {
     }
 
     public boolean isGameFinished() {
-        if(gameFinished == true){
+        if (gameFinished == true) {
             System.exit(0);
             return true;
         }
@@ -258,7 +259,7 @@ public class EscapeGame {
 
         double alienChance = 0.52;
 
-        double lecturerChance = 0.28; 
+        double lecturerChance = 0.28;
 
         if (eventChance < alienChance) {
             System.out.println("");
@@ -276,14 +277,15 @@ public class EscapeGame {
 
         } else if (eventChance < alienChance + lecturerChance) {
             String[] lecturerNames = { "Mrs. Safitri", "Mr. Poeser", "Mrs. Vaseva", "Mrs. Gaertner", "Mr. Gnaoui" };
-            String[] lecturerDescription = {"She's sitting on a chair with her pink Stanley bottle, she seems to be daydreaming..",
-            "He is drawing a beautiful landscape on the whiteboard, it's quite mesmerizing.",
-            "She's fidgeting with a pen in her hand, she seems to be nervous..",
-            "The window is open, her hair is flying with the wind.",
-            "He looks confidently at you, almost as if he anticipated your arrivial."};
+            String[] lecturerDescription = {
+                    "She's sitting on a chair with her pink Stanley bottle, she seems to be daydreaming..",
+                    "He is drawing a beautiful landscape on the whiteboard, it's quite mesmerizing.",
+                    "She's fidgeting with a pen in her hand, she seems to be nervous..",
+                    "The window is open, her hair is flying with the wind.",
+                    "He looks confidently at you, almost as if he anticipated your arrivial." };
             int lecturerIndex = (int) (Math.random() * lecturerNames.length);
             String lecturerName = lecturerNames[lecturerIndex];
-            int descriptionIndex = lecturerIndex; 
+            int descriptionIndex = lecturerIndex;
             String lecturerDescriptions = lecturerDescription[descriptionIndex];
             Lecturer lecturer = new Lecturer();
             lecturer.setName(lecturerName);
@@ -296,7 +298,7 @@ public class EscapeGame {
                 return;
             }
 
-            System.out.println("You encounter " + lecturer.getName() +" "+ lecturer.getDescription());
+            System.out.println("You encounter " + lecturer.getName() + " " + lecturer.getDescription());
             System.out.println("Do you want to try to get a signature from " + lecturer.getName() + "? (Y/N)");
             System.out.println("");
             Scanner scanner = new Scanner(System.in);
@@ -336,7 +338,6 @@ public class EscapeGame {
 
     /**
      * Verarbeitet die Eingaben für die Begegnungen mit Butters (friendly Alien).
-     * 
      */
     public void friendlyInputHandler() {
         Scanner scanner = new Scanner(System.in);
@@ -437,14 +438,22 @@ public class EscapeGame {
         return false;
     }
 
+    /**
+     * Aufruf für Prof Majuntke im Endgame
+     * Methode dient ausschließlich der Übersicht
+     */
     public void majuntke() {
         System.out.println("");
         System.out.println("You leave the room and Prof Majuntke stands in the hallway." + "\n" +
-        "So you collected all the signatures, huh? If you get the next question right, you're allowed to leave!");
+                "So you collected all the signatures, huh? If you get the next question right, you're allowed to leave!");
         System.out.println("If your answer is wrong two times, you'll have to stay here forever.");
         System.out.println("");
     }
 
+    /**
+     * Methode für das Menü im Endgame, wenn der Gameloop verlassen wurde nachdem
+     * alle Überschriften gesammelt wurden.
+     */
     public void endgameMenu() {
 
         double questionChance = Math.random();
@@ -452,7 +461,6 @@ public class EscapeGame {
         double questionOne = 0.33;
         double questionTwo = 0.66;
         double questionThree = 0.99;
-
 
         if (questionChance < questionOne) {
             System.out.println("What is the digit 7?");
@@ -483,10 +491,14 @@ public class EscapeGame {
             System.out.println("[4] boolean");
             System.out.println("");
             endgameInputHandler();
-            
+
         }
     }
 
+    /**
+     * Der Input-Handler für das Endgame Menü, hier werden die Eingaben für die
+     * Fragen ausgewertet.
+     */
     public void endgameInputHandler() {
         Scanner scanner = new Scanner(System.in);
         String endgameChoice = scanner.nextLine();
@@ -498,7 +510,8 @@ public class EscapeGame {
                     System.out.println("Wrong answer, you have one more try!");
                     System.out.println("");
                     endgameMenu();
-                } break;
+                }
+                break;
             case "2":
                 wrongAnswer++;
                 while (!isGameOver()) {
@@ -506,7 +519,8 @@ public class EscapeGame {
                     System.out.println("Wrong answer, you have one more try!");
                     System.out.println("");
                     endgameMenu();
-                } break;
+                }
+                break;
             case "3":
                 System.out.println("");
                 System.out.println("Ding Ding Ding! Your Answer is right! I will grant you a completion certificate!");
@@ -523,7 +537,8 @@ public class EscapeGame {
                     System.out.println("Wrong answer, you have one more try!");
                     System.out.println("");
                     endgameMenu();
-                } break;
+                }
+                break;
             default:
                 System.out.println("");
                 System.out.println("Wrong input, try using [1], [2], [3] or [4]");
